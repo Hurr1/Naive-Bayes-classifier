@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
-#include "Algorithm/Algorithm.h"
-#include "CSVRow/CSVRow.h"
+#include "Algorithm/Algorithm.hpp"
+#include "CSVRow/CSVRow.hpp"
 #include <random>
 
 
@@ -28,7 +28,11 @@ int main(int argc, char *argv[])
     dataBase = algs::createDataBase(trainSet);
     testDataBase = algs::createDataBase(testSet);
 
-    std::cout<<dataBase.size() << " " << testDataBase.size()<<'\n';
+    double yes_count = algs::count_decision_parameter(dataBase,"tak");
+    double no_count = algs::count_decision_parameter(dataBase,"nie");
 
-    
+    for(const auto& record : dataBase)
+    {
+        algs::determine_the_result(record,dataBase,yes_count,no_count);
+    }   
 }
