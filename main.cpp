@@ -1,8 +1,6 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <sstream>
 #include "Algorithm/Algorithm.hpp"
-#include "CSVRow/CSVRow.hpp"
-#include <random>
-
 
 int main(int argc, char *argv[])
 {
@@ -31,8 +29,31 @@ int main(int argc, char *argv[])
     double yes_count = algs::count_decision_parameter(dataBase,"tak");
     double no_count = algs::count_decision_parameter(dataBase,"nie");
 
-    for(const auto& record : dataBase)
+    for(const auto& record : testDataBase)
     {
         algs::determine_the_result(record,dataBase,yes_count,no_count);
-    }   
+    } 
+    
+    std::vector<std::string>attributes;
+    std::string input_msg,splited;
+
+    while(true)
+    {
+        std::getline(std::cin,input_msg);
+        std::istringstream f(input_msg);  
+        while (std::getline(f, splited, ' '))
+            attributes.emplace_back(splited);
+        if(attributes[0] == "STOP")
+            return 0;
+        if(attributes.size()!=dataBase[0].size()-1)
+        {
+            std::cerr<<"You provide incorrect number of attributes"<<'\n';
+            attributes.clear();
+        }
+        else
+        {
+            algs::determine_the_result(Node(attributes),dataBase,yes_count,no_count);
+            attributes.clear();
+        }
+    }  
 }

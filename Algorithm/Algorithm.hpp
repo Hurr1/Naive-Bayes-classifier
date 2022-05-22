@@ -1,5 +1,9 @@
-#include <vector>
 #include "../Node/Node.hpp"
+#include "../CSVRow/CSVRow.hpp"
+
+
+std::istream& operator>>(std::istream& str, CSVRow& data);
+
 
 namespace algs
 {
